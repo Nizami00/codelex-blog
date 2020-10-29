@@ -31,19 +31,33 @@ function query(): QueryBuilder
     return database()->createQueryBuilder();
 }
 
-$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $namespace = '\App\Controllers\\';
-
+$dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
+    $namespace = 'App\Controllers\\';
+    //display main pages
     $r->addRoute('GET', '/', $namespace . 'ArticlesController@index');
-
+    //create new article
+    $r->addRoute('GET', '/articles/create', $namespace . 'ArticlesController@create');
+    $r->addRoute('POST', '/articles/submitNewArticle', $namespace . 'ArticlesController@submitNewArticle');
     $r->addRoute('GET', '/articles', $namespace . 'ArticlesController@index');
+    //show articles
     $r->addRoute('GET', '/articles/{id}', $namespace . 'ArticlesController@show');
+    //create comment
+    $r->addRoute('POST', '/articles/{id}/comment', $namespace . 'CommentController@storeComment');
+    //delete comment
+    $r->addRoute('DELETE', '/articles/{id}/{idC}/deleteComment', $namespace . 'CommentController@deleteComment');
+    //delete article
+    $r->addRoute('DELETE', '/articles/{id}', $namespace . 'ArticlesController@delete');
+    //edit existing pages
+    $r->addRoute('GET', '/articles/{id}/edit', $namespace . 'ArticlesController@edit');
+    $r->addRoute('PUT', '/articles/{id}/update', $namespace . 'ArticlesController@update');
+    //like or dislike each article
+    $r->addRoute('POST', '/articles/{id}/like', $namespace . 'ArticlesController@like');
+    $r->addRoute('POST', '/articles/{id}/dislike', $namespace . 'ArticlesController@dislike');
 
-    $r->addRoute('POST', '/articles/{id}/delete', $namespace . 'ArticlesController@delete');
 });
 
 // Fetch method and URI from somewhere
-$httpMethod = $_SERVER['REQUEST_METHOD'];
+$httpMethod = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 
 // Strip query string (?foo=bar) and decode URI
