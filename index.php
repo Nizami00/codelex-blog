@@ -35,6 +35,15 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $namespace = 'App\Controllers\\';
     //display main pages
     $r->addRoute('GET', '/', $namespace . 'ArticlesController@index');
+    //register
+    $r->addRoute('GET', '/register', $namespace . 'RegisterController@register');
+    //login
+    $r->addRoute('GET', '/login', $namespace . 'LoginController@login');
+    $r->addRoute('POST', '/login/authorize', $namespace . 'LoginController@authorize');
+    $r->addRoute('POST', '/register/store', $namespace . 'RegisterController@store');
+    //logout
+    $r->addRoute('GET', '/logout', $namespace . 'LoginController@logout');
+
     //create new article
     $r->addRoute('GET', '/articles/create', $namespace . 'ArticlesController@create');
     $r->addRoute('POST', '/articles/submitNewArticle', $namespace . 'ArticlesController@submitNewArticle');
@@ -53,6 +62,7 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     //like or dislike each article
     $r->addRoute('POST', '/articles/{id}/like', $namespace . 'ArticlesController@like');
     $r->addRoute('POST', '/articles/{id}/dislike', $namespace . 'ArticlesController@dislike');
+
 
 });
 
