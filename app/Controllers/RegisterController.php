@@ -8,11 +8,13 @@ session_start();
 
 class RegisterController
 {
+refferal_link
     public function register(array $vars)
     {
         return require_once __DIR__ . '/../Views/RegisterView.php';
     }
 
+refferal_link
     public function store(array $vars)
     {
         $email = ($_POST["email"]);
@@ -46,6 +48,7 @@ class RegisterController
 
             $userQuery->execute();
 
+refferal_link
             $userID = (int) $userQuery->getConnection()->lastInsertId();
 
             if($_POST['reffer']){
@@ -83,8 +86,6 @@ class RegisterController
                 ->setParameter(0, $encodeEmail)
                 ->setParameter(1, $userID)
                 ->execute();
-
-
             $login = new LoginController();
             $login->authorize();
 

@@ -12,7 +12,7 @@ body {
 /* Style the header links */
 .header a {
     float: left;
-    color: #949494;
+    color: black;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
@@ -55,7 +55,12 @@ body {
 }
 
 .header a:nth-child(2):hover ~ #indicator {
-    left: 57%;
+    left: 40%;
+    background: linear-gradient(130deg, purple, palevioletred);
+}
+
+.header a:nth-child(3):hover ~ #indicator {
+    left: 77%;
     background: linear-gradient(130deg, purple, palevioletred);
 }
 

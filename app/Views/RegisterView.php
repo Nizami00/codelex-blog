@@ -27,7 +27,7 @@
     </div>
 </div>
 <form onSubmit="return validate()" action="/register/store" method="post">
-<form onSubmit="return validate()" action="/register/store" method="get">
+
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
@@ -53,7 +53,6 @@
         <hr>
         <button type="submit" class="registerbtn">Register</button>
     </div>
-
 </form>
 </form>
 </body>
