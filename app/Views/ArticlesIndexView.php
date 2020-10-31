@@ -14,7 +14,7 @@
 </div>
 
 <hr class="rounded">
-<div class="body"
+<div class="body">
 <?php foreach ($articles as $article): ?>
     <h3>
         <a href="/articles/<?php echo $article->id(); ?>">

@@ -35,10 +35,24 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $namespace = 'App\Controllers\\';
     //display main pages
     $r->addRoute('GET', '/', $namespace . 'ArticlesController@index');
+<<<<<<< Updated upstream
+=======
+    //register
+    $r->addRoute('GET', '/register', $namespace . 'RegisterController@register');
+    $r->addRoute('GET', '/register/reffer', $namespace . 'RegisterController@register');
+    //login
+    $r->addRoute('GET', '/login', $namespace . 'LoginController@login');
+    $r->addRoute('POST', '/login/authorize', $namespace . 'LoginController@authorize');
+    $r->addRoute('POST', '/register/store', $namespace . 'RegisterController@store');
+    //logout
+    $r->addRoute('GET', '/logout', $namespace . 'LoginController@logout');
+>>>>>>> Stashed changes
     //create new article
     $r->addRoute('GET', '/articles/create', $namespace . 'ArticlesController@create');
     $r->addRoute('POST', '/articles/submitNewArticle', $namespace . 'ArticlesController@submitNewArticle');
     $r->addRoute('GET', '/articles', $namespace . 'ArticlesController@index');
+    //register
+    $r->addRoute('GET', '/{reffer}', $namespace . 'RegisterController@register');
     //show articles
     $r->addRoute('GET', '/articles/{id}', $namespace . 'ArticlesController@show');
     //create comment
@@ -54,11 +68,17 @@ $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) 
     $r->addRoute('POST', '/articles/{id}/like', $namespace . 'ArticlesController@like');
     $r->addRoute('POST', '/articles/{id}/dislike', $namespace . 'ArticlesController@dislike');
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 });
 
 // Fetch method and URI from somewhere
 $httpMethod = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
+
 
 // Strip query string (?foo=bar) and decode URI
 if (false !== $pos = strpos($uri, '?')) {
