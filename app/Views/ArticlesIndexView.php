@@ -1,7 +1,8 @@
+<?php session_start() ; ?>
 </html>
-
 <head>
-    <link rel="stylesheet" type="text/css" href="/app/Views/MainPage.css">
+    <link rel="stylesheet" type="text/css" href="app/Views/css/MainPage.css">
+    <link rel="stylesheet" type="text/css" href="app/Views/css/RegisterStyle.css">
 </head>
 <body>
 <div class="header">
@@ -9,10 +10,15 @@
     <div class="header-right">
         <a href="/">HOME</a>
         <a href="/articles/create">CREATE</a>
+        <?php if(!isset($_SESSION['user'])) :?>
+        <a href="/register">REGISTER</a>
+        <a href="/login">LOGIN</a>
+        <?php else : ?>
+        <a href="/logout">LOGOUT</a>
+        <?php endif ;?>
         <div id="indicator"></div>
     </div>
 </div>
-
 <hr class="rounded">
 <div class="body"
 <?php foreach ($articles as $article): ?>
@@ -49,6 +55,14 @@
 
     <hr>
 <?php endforeach; ?>
-</div>
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
 </body>
 </html>

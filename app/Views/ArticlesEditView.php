@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="/app/Views/WriteArticles.css">
+    <link rel="stylesheet" type="text/css" href="/Views/css/WriteArticles.css">
 </head>
 <body>
 
