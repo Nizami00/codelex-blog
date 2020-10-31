@@ -27,6 +27,7 @@
     </div>
 </div>
 <form onSubmit="return validate()" action="/register/store" method="post">
+
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
@@ -41,12 +42,18 @@
 
         <label for="password-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="password-repeat" id="psw-repeat" required>
-        <hr>
 
+        <?php if(!isset($vars)) : ?>
+        <label for="reffer"><b>Add refferal link</b></label>
+        <input type="text" placeholder="reffer" name="reffer" id="reffer">
+        <?php else : ?>
+            <label for="reffer"><b>Add refferal link</b></label>
+            <input type="text" placeholder="reffer" name="reffer" id="reffer" value="<?=$vars['reffer'];?>"required>
+        <?php endif ; ?>
+        <hr>
         <button type="submit" class="registerbtn">Register</button>
     </div>
-
 </form>
-
+</form>
 </body>
 </html>
