@@ -8,15 +8,25 @@ session_start();
 
 class RegisterController
 {
-refferal_link
+
     public function register(array $vars)
     {
+        $referral = $_GET['r'] ?? null;
+
+        $user = query()
+            ->select('*')
+            ->from('users')
+            ->where('reffered_by = :email')
+            ->setParameter('email', $referral)
+            ->execute()
+            ->fetchAssociative();
+
         return require_once __DIR__ . '/../Views/RegisterView.php';
     }
 
-refferal_link
-    public function store(array $vars)
+    public function store()
     {
+
         $email = ($_POST["email"]);
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -48,10 +58,9 @@ refferal_link
 
             $userQuery->execute();
 
-refferal_link
-            $userID = (int) $userQuery->getConnection()->lastInsertId();
+            $userID = (int)$userQuery->getConnection()->lastInsertId();
 
-            if($_POST['reffer']){
+            if ($_POST['reffer']) {
                 query()
                     ->update('users')
                     ->set('reffered_by', ':reffered_by')
@@ -62,12 +71,12 @@ refferal_link
                     ->setParameter('id', $userID)
                     ->execute();
 
-            }elseif($vars){
+            } else {
                 query()
                     ->update('users')
                     ->set('reffered_by', ':reffered_by')
                     ->setParameters([
-                        'reffered_by' => $vars['reffer'],
+                        'reffered_by' => $_GET['r'] ?? null,
                     ])
                     ->where('id = :id')
                     ->setParameter('id', $userID)
@@ -86,6 +95,7 @@ refferal_link
                 ->setParameter(0, $encodeEmail)
                 ->setParameter(1, $userID)
                 ->execute();
+
             $login = new LoginController();
             $login->authorize();
 
@@ -94,7 +104,6 @@ refferal_link
 
         return header('Location: /register');
     }
-
 
 
     private function encodePassword(string $password): string

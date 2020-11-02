@@ -7,10 +7,10 @@
     <link rel="stylesheet" type="text/css" href="app/Views/css/MainPage.css">
     <title>Register</title>
     <script>
-        function validate(){
+        function validate() {
             let a = document.getElementById("password").value;
             let b = document.getElementById("password-repeat").value;
-            if (a!==b) {
+            if (a !== b) {
                 alert("Passwords do no match");
                 return false;
             }
@@ -26,8 +26,7 @@
         <div id="indicator"></div>
     </div>
 </div>
-<form onSubmit="return validate()" action="/register/store" method="post">
-
+<form onSubmit="return validate()" method="post" action="/register<?php echo $referral ? '?r=' . $referral : null; ?>">
     <div class="container">
         <h1>Register</h1>
         <p>Please fill in this form to create an account.</p>
@@ -43,13 +42,10 @@
         <label for="password-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="password-repeat" id="psw-repeat" required>
 
-        <?php if(!isset($vars)) : ?>
-        <label for="reffer"><b>Add refferal link</b></label>
-        <input type="text" placeholder="reffer" name="reffer" id="reffer">
-        <?php else : ?>
+        <?php if (!$referral) : ?>
             <label for="reffer"><b>Add refferal link</b></label>
-            <input type="text" placeholder="reffer" name="reffer" id="reffer" value="<?=$vars['reffer'];?>"required>
-        <?php endif ; ?>
+            <input type="text" placeholder="reffer" name="reffer" id="reffer">
+        <?php endif; ?>
         <hr>
         <button type="submit" class="registerbtn">Register</button>
     </div>
